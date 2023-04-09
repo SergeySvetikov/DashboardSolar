@@ -8,17 +8,17 @@ import { ProductsService } from '../../../../services/products.service';
 })
 export class MainProductsComponent implements OnInit {
   isLoading: boolean = true;
-  adverts: any[] = [];
+  adverts: any[] | null = null;
   skeleton = new Array(20);
 
-  constructor(private readonly _ProductsService: ProductsService) {}
+  constructor(private readonly _ProductsService: ProductsService) { }
 
   public ngOnInit(): void {
     this._ProductsService.getProducts().subscribe((response) => {
       setTimeout(() => {
         this.adverts = response;
         this.isLoading = false;
-      }, 1500);
+      }, 1000)
     });
   }
 }

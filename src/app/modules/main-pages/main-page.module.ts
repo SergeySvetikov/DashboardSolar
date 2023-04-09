@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MainPageRoutingModule } from './main-page.routing.module';
 import { MainProductsComponent } from './pages/main-products/main-products.component';
-import { ProductsItemComponentModule } from '../../shared/components/products-item/products-item.component';
+import { ProductsItemComponentModule } from '../../shared/components/products-item/product-item.component';
 
 @NgModule({
   declarations: [MainProductsComponent],
@@ -16,4 +16,4 @@ import { ProductsItemComponentModule } from '../../shared/components/products-it
     SkeletonModule,
   ],
 })
-export class MainPageModule {}
+export class MainPageModule { }

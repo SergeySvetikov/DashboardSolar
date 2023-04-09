@@ -68,14 +68,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "options": {
+            "production": {
+              "browserTarget": "DashboardSolar:build:production",
               "proxyConfig": "src/proxy.conf.json"
             },
-            "production": {
-              "browserTarget": "DashboardSolar:build:production"
-            },
             "development": {
-              "browserTarget": "DashboardSolar:build:development"
+              "browserTarget": "DashboardSolar:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

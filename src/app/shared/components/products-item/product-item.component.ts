@@ -10,7 +10,7 @@ import {SkeletonModule} from "primeng/skeleton";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsItemComponent {
-  @Input() products: any | undefined;
+  @Input() product: any | undefined;
 }
 @NgModule({
   declarations: [ProductsItemComponent],
@@ -18,4 +18,3 @@ export class ProductsItemComponent {
   imports: [RouterLink, NgIf, SkeletonModule,],
 })
 export class ProductsItemComponentModule {}
-
