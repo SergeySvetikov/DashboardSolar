@@ -1,12 +1,12 @@
-<ng-container *ngIf="products; else skeleton">
+<ng-container *ngIf="product; else skeleton">
   <div class="card" routerLink="ad-view">
     <div class="image-wrapper">
-      <img [src]="products" class="image">
+      <img [src]="product.src ?? '../../../../assets/img/placeholder.png'" class="image" alt="Изображение объявления">
     </div>
-    <h4 class="title">{{products.name}}</h4>
-    <p class="price">{{products.name}}</p>
-    <p class="address">{{products.name}}</p>
-    <p class="date">{{products.name}}</p>
+    <h4 class="title">{{product.name}}</h4>
+    <p class="price">{{product.price ?? "Цена не указана"}}</p>
+    <p class="address">{{product.adress ?? "Адрес не указан"}}</p>
+    <p class="date">{{product.date ?? "Дата создания неизвестна"}}</p>
   </div>
 </ng-container>
 <ng-template #skeleton>
@@ -38,6 +38,3 @@
     ></p-skeleton>
   </div>
 </ng-template>
-
-
-
