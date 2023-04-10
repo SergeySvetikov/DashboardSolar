@@ -4,7 +4,7 @@ import {MyOptionsComponent} from "./my-options/my-options.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'my-options',
     pathMatch: 'full',
     component: MyOptionsComponent
   }
