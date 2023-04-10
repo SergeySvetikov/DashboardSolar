@@ -1,7 +1,7 @@
 <ng-container *ngIf="product; else skeleton">
-  <div class="card" routerLink="ad-view">
+  <div class="card">
     <div class="image-wrapper">
-      <img [src]="product.src ?? '../../../../assets/img/placeholder.png'" class="image" alt="Изображение объявления">
+      <img [src]="product.src ?? 'assets/img/placeholder.png'" class="image" alt="Изображение объявления">
     </div>
     <h4 class="title">{{product.name}}</h4>
     <p class="price">{{product.price ?? "Цена не указана"}}</p>

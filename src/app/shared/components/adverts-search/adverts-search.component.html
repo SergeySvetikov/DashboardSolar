@@ -1,10 +1,10 @@
 <div class="adverts-search">
   <div class="adverts-container container">
-    <h3 class="adverts-search__title" routerLink="/main-products">Доска объявлений</h3>
+    <h3 class="adverts-search__title" routerLink="/">Доска объявлений</h3>
     <div class="adverts-search__form-container">
-      <button class="adverts-search__category-btn">
+      <button class="adverts-search__category-btn" (click)="toggleCategories()">
         <i class="pi pi-align-center"></i>
-        <span class="adverts-search__category-btn-text">
+        <span class="adverts-search__category-btn-text" >
           Все категории
         </span>
       </button>
@@ -22,3 +22,4 @@
     </div>
   </div>
 </div>
+<app-categories *ngIf="isCategoriesOpened"></app-categories>

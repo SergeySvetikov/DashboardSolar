@@ -4,7 +4,7 @@ import {MyNewProductComponent} from "./my-new-product/my-new-product.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'my-new-product',
     pathMatch: 'full',
     component: MyNewProductComponent
   },

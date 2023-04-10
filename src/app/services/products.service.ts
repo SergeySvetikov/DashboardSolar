@@ -7,9 +7,7 @@ import { IProduct } from '../interfaces/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
-
   constructor(private _http: HttpClient) { }
-
   getProducts():Observable<any>{
     return this._http.get<IProduct[]>('/endpoints/Advert')
   }

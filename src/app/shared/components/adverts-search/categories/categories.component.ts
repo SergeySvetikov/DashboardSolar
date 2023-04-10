@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, } from '@angular/core';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent {
-
+export class CategoriesComponent{
+  @Input() isCategoriesOpened: boolean = false;
 }
