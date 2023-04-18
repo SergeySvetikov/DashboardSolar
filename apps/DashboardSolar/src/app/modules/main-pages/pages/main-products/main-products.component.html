@@ -1,0 +1,22 @@
+<div class="container">
+  <h3 class="recommendations-title">Рекомендации для вас</h3>
+  <div class="ads-grid">
+    <ng-container *ngIf="isLoading">
+      <div class="" *ngFor="let item of skeleton">
+        <app-products-item></app-products-item>
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="adverts && adverts.length !== 0 && !isLoading; else noAdverts"
+    >
+      <div *ngFor="let product of adverts">
+        <div>
+          <app-products-item [product]="product"></app-products-item>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-template #noAdverts>
+    <p>У вас пока нет рекомендованных объявлений</p>
+  </ng-template>
+</div>
