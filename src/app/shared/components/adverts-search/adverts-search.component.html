@@ -1,0 +1,25 @@
+<div class="adverts-search">
+  <div class="adverts-container container">
+    <h3 class="adverts-search__title" routerLink="/">Доска объявлений</h3>
+    <div class="adverts-search__form-container">
+      <button class="adverts-search__category-btn" (click)="toggleCategories()">
+        <i class="pi pi-align-center"></i>
+        <span class="adverts-search__category-btn-text" >
+          Все категории
+        </span>
+      </button>
+      <form class="adverts-search__search-form">
+        <input
+          class="adverts-search__search-input"
+          placeholder="Поиск по объявлениям"
+          type="text"
+        />
+        <button class="adverts-search__search-btn" type="submit">
+          <span class="adverts-search__search-btn-text">Найти</span>
+          <i class="pi pi-search"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<app-categories *ngIf="isCategoriesOpened"></app-categories>
