@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -17,33 +23,55 @@ export class LoginModalComponent implements OnInit {
   ) {
     _config.header = 'Авторизация';
   }
-
+  ngOnInit() {
+    this._initForm();
+  }
   onSubmit() {
     this._dialogRef.close(true);
   }
-
   switchMode() {
     this.loginMode = !this.loginMode;
     this._config.header = this.loginMode ? 'Авторизация' : 'Регистрация';
-    this.initForm();
+    this._initForm();
   }
-
-  initForm() {
+  private _initForm() {
     if (this.loginMode) {
       this.authForm = new FormGroup({
-        phone: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
       });
     } else {
-      this.authForm = new FormGroup({
-        phone: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
-        passwordConfirmation: new FormControl('', Validators.required),
-      });
+      this.authForm = new FormGroup(
+        {
+          email: new FormControl(null, [Validators.required, Validators.email]),
+          password: new FormControl(null, [
+            Validators.required,
+            Validators.minLength(6),
+          ]),
+          passwordConfirmation: new FormControl(null, [Validators.required]),
+        },
+        {
+          validators: [this._passwordsMatchValidator],
+        }
+      );
     }
   }
+  private _passwordsMatchValidator(
+    form: AbstractControl
+  ): ValidationErrors | null {
+    const { password, passwordConfirmation } = form.value;
+    const passwordConfirmationControl = form.get('passwordConfirmation');
 
-  ngOnInit() {
-    this.initForm();
+    const errors =
+      password === passwordConfirmation || (!password && !passwordConfirmation)
+        ? null
+        : { passwordMismatch: true };
+
+    passwordConfirmationControl?.setErrors(errors);
+
+    return errors;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { CategoryService } from '../../../services/category.service';
+import { CategoryService } from '../../../core/services/category.service';
 import { CategoriesComponent } from './categories/categories.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';

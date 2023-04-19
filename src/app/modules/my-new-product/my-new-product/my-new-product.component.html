@@ -1,1 +1,57 @@
-<p>Создать новое объявление</p>
+<div class="container">
+  <h3 class="advert-title">Новое объявление</h3>
+  <form class="container-form">
+    <div class="label-form">
+      <label class="label-form">
+        Выберите категорию
+        <span>*</span>
+      </label>
+      <p-cascadeSelect
+        class="flex label-form"
+        [options]="categories"
+        optionLabel="name"
+        optionGroupLabel="name"
+        [optionGroupChildren]="['subCategories']"
+        placeholder="Нажмите, чтобы выбрать"
+      ></p-cascadeSelect>
+    </div>
+    <div>
+      <label class="label-form">
+        Название объявления
+        <span>*</span>
+      </label>
+      <input class="input-form" placeholder="Что хотите продать?"/>
+    </div>
+    <div>
+      <label class="label-form"> Описание </label>
+      <textarea
+        class="input-form text-input"
+        placeholder="Расскажите подробнее о товаре или услуге"
+      ></textarea>
+    </div>
+    <div>
+      <label class="label-form">
+        Адрес (место проведения сделки)
+        <span>*</span>
+      </label>
+      <input class="input-form" placeholder="Начните вводить адрес"/>
+    </div>
+    <div class="input-form load-img">
+      <label class="load-btn">
+        <input type="file" accept="image/*"/>
+        <i class="pi pi-image" style="font-size: 1rem"></i>
+        Добавить картинки
+      </label>
+      Максимум 10 картинок в формате jpeg, png или heic
+    </div>
+    <div>
+      <label class="label-form"> Цена </label>
+      <input class="input-form" type="text" placeholder="0 ₽"/>
+    </div>
+    <button [disabled]="true" class="submit">Разместить объявление</button>
+  </form>
+  <p class="rules">
+    Нажимая кнопку «Разместить объявление»<br/>
+    Вы соглашаетесь с <a>правилами площадки</a>
+  </p>
+</div>
