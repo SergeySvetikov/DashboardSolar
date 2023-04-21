@@ -7,9 +7,9 @@ import {ICategory} from "../interfaces/category.model";
   providedIn: 'root'
 })
 export class CategoryService {
-  endpoint: string = '/endpoints/Category';
+  baseUrl: string = '/api/Category';
   constructor(private _http: HttpClient) {}
   getCategories():Observable<any>{
-    return this._http.get<ICategory[]>(`${this.endpoint}`)
+    return this._http.get<ICategory[]>(`${this.baseUrl}`)
   }
 }

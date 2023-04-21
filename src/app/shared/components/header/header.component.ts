@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,7 @@ export class HeaderComponent implements OnInit {
   menuItems!: MenuItem[];
   isAuthenticated: boolean = false;
 
-  constructor(private _dialogService: DialogService) {}
+  constructor(private _dialogService: DialogService, private authService: AuthService) {}
 
   ngOnInit() {
     this.menuItems = [
@@ -28,10 +30,13 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Выйти',
         command: () => {
-          this.isAuthenticated = false;
+          this.authService.logout()
         }
       },
     ];
+    this.authService.isAuth$.subscribe((value) => {
+      this.isAuthenticated = value
+    })
   }
 
   showAuthDialog() {
@@ -43,8 +48,5 @@ export class HeaderComponent implements OnInit {
       },
     });
 
-    this.ref.onClose.subscribe((isAuthenticated: boolean) => {
-      this.isAuthenticated = isAuthenticated;
-    });
   }
 }
