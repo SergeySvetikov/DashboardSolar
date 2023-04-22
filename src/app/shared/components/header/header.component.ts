@@ -3,21 +3,19 @@ import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   ref!: DynamicDialogRef;
   menuItems!: MenuItem[];
-  isAuthenticated: boolean = false;
+  isAuthenticated: Observable<boolean> = this.authService.isAuth$;
 
-  constructor(private _dialogService: DialogService, private authService: AuthService) {}
-
-  ngOnInit() {
+  constructor(private _dialogService: DialogService, private authService: AuthService) {
     this.menuItems = [
       {
         label: 'Мои объявления',
@@ -34,9 +32,6 @@ export class HeaderComponent implements OnInit {
         }
       },
     ];
-    this.authService.isAuth$.subscribe((value) => {
-      this.isAuthenticated = value
-    })
   }
 
   showAuthDialog() {

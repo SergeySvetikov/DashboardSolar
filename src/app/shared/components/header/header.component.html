@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header-wrapper">
 
-    <ng-container *ngIf="isAuthenticated; else notAuthenticated" class="header-buttons">
+    <ng-container *ngIf="(isAuthenticated | async); else notAuthenticated" class="header-buttons">
       <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
 
       <button (click)="menu.toggle($event)" class="p-button-text header-buttons__login-btn" pButton>
@@ -30,4 +30,3 @@
 
   </div>
 </header>
-
