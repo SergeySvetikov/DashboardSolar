@@ -7,10 +7,10 @@ import { Observable } from "rxjs";
 })
 export class FileService {
   constructor(private _http: HttpClient) { }
-  endpoint: string = '/endpoints/File';
+  baseUrl: string = '/api/File';
   upload(file: File): Observable<string> {
     const formData = new FormData();
     formData.append('file', file, file.name);
-    return this._http.post<string>(`${this.endpoint}`, formData);
+    return this._http.post<string>(`${this.baseUrl}`, formData);
   }
 }
