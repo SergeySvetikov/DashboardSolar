@@ -1,4 +1,4 @@
-.advert-title {
+h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -7,9 +7,32 @@
 .container-form {
   max-width: 856px;
 }
+.input{
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 16px;
+  line-height: 24px;
+}
 
-span {
-  color: #ef4444;
+::ng-deep .p-cascadeselect{
+  border-radius: 4px;
+  margin-bottom: 0;
+}
+
+::ng-deep form p-progressSpinner .p-progress-spinner{
+  width: 32px;
+  height: 32px;
+  margin: 0 12px;
+}
+
+::ng-deep .ng-invalid.ng-touched > .p-cascadeselect{
+  border-color:#EF4444;
+}
+
+::ng-deep .p-cascadeselect:not(.p-disabled).p-focus{
+  box-shadow: none;
+  border-color: #3B82F6;;
 }
 
 .input-form {
@@ -21,8 +44,8 @@ span {
   border-radius: 4px;
   height: 48px;
   padding: 12px;
-  margin-bottom: 16px;
   font-size: 16px;
+  margin-top: 6px;
   color: #1e293b;
 }
 
@@ -37,17 +60,25 @@ span {
   resize: none;
 }
 
+.alert{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #EF4444;
+}
+
 .label-form {
   display: inline-block;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
   color: #1e293b;
-  margin-bottom: 8px;
+  margin-top: 8px
 }
 
 .flex {
   display: flex;
+  flex-direction: column;
 }
 
 .load-img {
@@ -64,19 +95,12 @@ span {
   display: none;
 }
 
-.load-btn {
-  display: flex;
-  align-items: center;
-  height: 35px;
-  margin-right: 16px;
-  padding: 7.5px 12px;
-  font-size: 14px;
-  line-height: 24px;
+button, .load-btn{
   color: white;
-  background: #3b82f6;
+  background: #3B82F6;
   border-radius: 4px;
-  transition: 200ms;
-  cursor: pointer;
+  transition:200ms;
+  cursor:pointer;
 }
 
 .load-btn:hover {
@@ -89,9 +113,22 @@ span {
 
 .submit {
   margin-top: 8px;
-  border: none;
   font-size: 18px;
+  border: none;
   padding: 12px;
+}
+
+.submit:disabled{
+  opacity: .8;
+}
+
+.add-link {
+  margin-left:16px;
+  color: black;
+}
+
+.new-add-link a{
+  color: #3B82F6;
 }
 
 .rules {
@@ -166,33 +203,41 @@ span {
   }
 }
 
+@media screen and (min-width:576.98px) and (max-width: 991.98px){
+  ::ng-deep p-overlay .p-overlay{
+    min-width: 208px !important;
+  }
+}
+
 @media (max-width: 575.98px) {
+  ::ng-deep p-cascadeSelect .p-cascadeselect-item-active>.p-cascadeselect-sublist{
+    left:0;
+    top:90%;
+  }
+
   .advert-title {
     font-size: 20px;
     margin: 12px 0;
   }
   label.load-btn {
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .input-form.load-img {
-    font-size: 10px;
+    font-size: 14px;
     padding: 6px 12px;
   }
   .load-btn {
-    font-size: 12px;
+    font-size: 14px;
     padding: 8px 12px;
   }
   .input-form {
-    font-size: 12px;
+    font-size: 14px;
     padding: 8px 12px;
     height: 40px;
   }
-  .pi-image {
-    display: none;
-  }
   .label-form {
-    font-size: 12px;
+    font-size: 14px;
   }
   label.load-btn {
     max-width: 60%;
@@ -202,9 +247,6 @@ span {
     font-size: 16px;
   }
   .rules {
-    font-size: 12px;
-  }
-  .p-cascadeselect-label {
-    min-width: 10rem;
+    font-size: 14px;
   }
 }

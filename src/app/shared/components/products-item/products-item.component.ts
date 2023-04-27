@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {NgIf} from "@angular/common";
+import { DatePipe, NgIf, TitleCasePipe } from "@angular/common";
 import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
@@ -8,13 +8,17 @@ import {SkeletonModule} from "primeng/skeleton";
   templateUrl: './products-item.component.html',
   styleUrls: ['./products-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ProductsItemComponent {
   @Input() product: any | undefined;
+
 }
 @NgModule({
   declarations: [ProductsItemComponent],
   exports: [ProductsItemComponent],
-  imports: [RouterLink, NgIf, SkeletonModule,],
+  imports: [RouterLink, NgIf, SkeletonModule, DatePipe, TitleCasePipe],
 })
-export class ProductsItemComponentModule {}
+export class ProductsItemComponentModule {
+
+}

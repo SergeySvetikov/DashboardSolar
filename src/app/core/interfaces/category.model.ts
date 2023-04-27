@@ -5,3 +5,4 @@ export interface ICategory {
   isActive?: boolean,
   createdAt?: string,
 }
+

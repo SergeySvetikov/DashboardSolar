@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MainPageRoutingModule } from './main-page.routing.module';
-import { MainProductsComponent } from './pages/main-products/main-products.component';
 import { ProductsItemComponentModule } from '../../shared/components/products-item/products-item.component';
+import { MainProductsComponent } from "./main-products/main-products.component";
 
 @NgModule({
   declarations: [MainProductsComponent],
