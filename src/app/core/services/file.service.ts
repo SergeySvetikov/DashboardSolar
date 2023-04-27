@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { catchError, map, Observable, throwError } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileService {
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
   baseUrl: string = '/api/File';
-  upload(file: File): Observable<string> {
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    return this._http.post<string>(`${this.baseUrl}`, formData);
+
+  uploadFile(file: File): Observable<string> {
+    const fileData = new FormData();
+    fileData.append('file', file, file.name);
+
+    return this._http.post<string>( `${this.baseUrl}`, fileData).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
   }
 }
+

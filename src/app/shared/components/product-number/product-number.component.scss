@@ -1,0 +1,35 @@
+.number{
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  color: #3B82F6;
+  margin: 0;
+}
+
+.bord{
+  border-top: 1px solid #E2E8F0;
+  margin: 16px 0;
+}
+
+.rules > p, li{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1E293B;
+}
+
+.rules ul{
+  display: block;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 576px){
+  .number{
+    font-size: 24px;
+  }
+
+  .rules > p, li{
+    font-size: 16px;
+  }
+}

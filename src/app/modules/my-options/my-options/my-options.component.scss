@@ -1,0 +1,72 @@
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  margin: 32px 0 24px 0;
+  font-family: "Inter", serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-family: "Inter", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.mail {
+  max-width: 416px;
+  width: 100%;
+}
+
+.name {
+  max-width: 416px;
+  width: 100%;
+}
+
+.address {
+  max-width: 856px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.label-note {
+  color: #64748b;
+}
+
+.current-password {
+  max-width: 416px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.new-password {
+  max-width: 416px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.password-form {
+  margin-bottom: 129px;
+}
+
+
+@media (max-width: 1350px) {
+  .container {
+    padding: 2px 15px 2px 15px;
+  }
+}

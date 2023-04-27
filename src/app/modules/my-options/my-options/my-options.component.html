@@ -1,1 +1,76 @@
-<p>Мои настройки</p>
+<div class="container">
+  <h2>Настройки</h2>
+  <form [formGroup]="optionsForm" (ngSubmit)="changeUserData()">
+    <span class="span">
+      <div class="name">
+        <p class="label">Имя</p>
+        <input
+          pInputText
+          placeholder="Имя"
+          [(ngModel)]="userName"
+          [style]="{ width: '100%' }"
+          formControlName="name"
+        />
+      </div>
+      <div class="mail">
+        <p class="label">Адресс электронной почты</p>
+        <input
+          pInputText
+          placeholder="Почта"
+          [(ngModel)]="userMail"
+          [style]="{ width: '100%' }"
+          formControlName="mail"
+        />
+      </div>
+    </span>
+    <div class="address">
+      <p class="label">
+        Адрес
+        <span class="label-note">
+          (будет указываться в объявлениях по умолчанию)
+        </span>
+      </p>
+      <input
+        pInputText
+        placeholder="Не указан"
+        [(ngModel)]="userAddress"
+        [style]="{ width: '100%' }"
+        formControlName="address"
+      />
+    </div>
+    <p-button label="Сохранить" styleClass="p-button" type="submit"></p-button>
+  </form>
+  <p class="form">Смена пароля</p>
+  <form [formGroup]="changePasswordForm" (ngSubmit)="changeUserPassword()" class="settings__password-form">
+    <div class="current-password">
+      <p class="label">Текущий пароль</p>
+      <input
+        [(ngModel)]="currentPassword"
+        [style]="{ width: '100%' }"
+        pInputText
+        placeholder="Введите текущий пароль"
+        formControlName="currentPassword"
+      />
+    </div>
+    <div class="new-password">
+      <p class="label">
+        Новый пароль
+        <span class="label-note"> (Минимум 8 символов) </span>
+      </p>
+      <input
+        pInputText
+        placeholder="Введите новый пароль"
+        [(ngModel)]="newPassword"
+        [style]="{ width: '100%' }"
+        formControlName="newPassword"
+      />
+    </div>
+    <p-button
+      label="Сохранить"
+      styleClass="p-button"
+      type="submit"
+      class="setting__password-button"
+      [disabled]="changePasswordForm.invalid"
+    ></p-button>
+  </form>
+</div>

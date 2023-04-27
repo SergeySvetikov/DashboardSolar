@@ -9,7 +9,11 @@ import { IProduct } from '../interfaces/product.model';
 export class ProductsService {
   constructor(private _http: HttpClient) { }
   baseUrl: string = '/api/Advert';
-  getProducts():Observable<any>{
+
+  createProduct(advertisement:IProduct):Observable<IProduct>{
+    return this._http.post<IProduct>('api/Advert', advertisement)
+  }
+  getProducts():Observable<IProduct[]>{
     return this._http.get<IProduct[]>(`${this.baseUrl}`)
   }
 }

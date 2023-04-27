@@ -1,12 +1,14 @@
 <ng-container *ngIf="product; else skeleton">
-  <div class="card">
-    <div class="image-wrapper">
-      <img [src]="product.src ?? 'assets/img/placeholder.png'" class="image" alt="Изображение объявления">
+  <div class="cont">
+    <div class="wrapper">
+      <img [src]="product.imageUrl" class="image" >
     </div>
     <h4 class="title">{{product.name}}</h4>
-    <p class="price">{{product.price ?? "Цена не указана"}}</p>
-    <p class="address">{{product.adress ?? "Адрес не указан"}}</p>
-    <p class="date">{{product.date ?? "Дата создания неизвестна"}}</p>
+    <p class="price">{{product.price ?? "Цена не указана"}} ₽</p>
+    <p class="address">{{product.address ?? "Адрес не указан"}}</p>
+    <p class="date">{{product.createdAt | date:'d MMMM':'':'ru' | titlecase}}
+      <span class="date">в {{product.createdAt | date:'HH:mm'}}</span>
+    </p>
   </div>
 </ng-container>
 <ng-template #skeleton>
