@@ -1,25 +1,23 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ICategory } from '../../../core/interfaces/category.model';
 import { DockModule } from 'primeng/dock';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ChipsModule } from 'primeng/chips';
 import { ProductsService } from '../../../core/services/products.service';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { CategoryService } from '../../../core/services/category.service';
 import { CommonModule, NgIf } from '@angular/common';
-import { AddImagesComponent } from '../add-images/add-images.component';
-import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { catchError, takeUntil, tap, throwError } from 'rxjs';
-import { IProduct } from '../../../core/interfaces/product.model';
 import { DestroyService } from '../../../core/services/destroy.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FileUpload, FileUploadModule } from "primeng/fileupload";
+import { INewProduct } from '../../../core/interfaces/new-product.model';
+import { FileService } from '../../../core/services/file.service';
 
 type ProductsCategory = ICategory & { subCategories?: ICategory[] };
 
@@ -35,95 +33,69 @@ type ProductsCategory = ICategory & { subCategories?: ICategory[] };
     ChipsModule,
     CascadeSelectModule,
     NgIf,
-    AddImagesComponent,
-    FileUploadModule,
     ProgressSpinnerModule,
     RouterLink,
+    FileUploadModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
 export class MyNewProductComponent implements OnInit {
   isLoading: boolean = false;
-  newProductId!: string;
-  error!: string;
+  error: string | null = null;
   categories: ProductsCategory[] = [];
-
-  productForm = this.fb.group({
-    category: ['', Validators.required],
-    name: [
-      '',
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
-    ],
-    description: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(300),
-      ],
-    ],
-    address: [
-      '',
-      [Validators.required, Validators.minLength(10), Validators.maxLength(60)],
-    ],
-    imageUrl: [
-      'http://90.156.209.122:5000/File/37edece3-0a01-48cd-93f2-06ce989fc3f5',
-      Validators.required,
-    ],
-    price: ['', [Validators.required, Validators.maxLength(7)]],
-  });
-
+  productForm!: FormGroup;
+  imagesError: boolean = false
+  selectedImage!: File | null
   constructor(
     private _productService: ProductsService,
     private _categoryService: CategoryService,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
-    private destroy$: DestroyService
-  ) {}
-
-  markCategoryAsTouched() {
-    this.productForm.controls.category.markAsTouched();
-    this.productForm.controls.category.updateValueAndValidity();
+    private _fileService: FileService,
+    private destroy$: DestroyService,
+    private _router: Router,
+  ) {
   }
-
+  imageSelected(imagesToSelect: FileUpload) {
+    this.selectedImage = imagesToSelect.files[0]
+    console.log(imagesToSelect.files[0])
+  }
+  imageRemove(imageToDelete: { file: File }) {
+    this.selectedImage = null
+  }
   ngOnInit(): void {
     this._categoryService.getCategories().subscribe((value) => {
       this.categories = value;
     });
+    this.productForm = this.fb.group({
+      category: [null, Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(350)]],
+      address: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.maxLength(7)]],
+    });
   }
-
-  onUpload(fileId: string) {
-    // @ts-ignore
-    this.productForm.get('fileId')?.setValue(fileId);
+  onSubmit() {
+    this._fileService.uploadFile(this.selectedImage!).subscribe((imageUrl) => {
+      const { name, description, category, price, address } =
+        this.productForm.value;
+      const newProduct: INewProduct = {
+        name: name,
+        description: description,
+        categoryId: category.id,
+        imageUrl: imageUrl,
+        price: Number(price),
+        address: address,
+      };
+      this._productService.createProduct(newProduct)
+        .subscribe(() => {
+          this._router.navigateByUrl('/')
+        })
+      this.isLoading = true
+    })
   }
-
-  createProduct() {
-    if (this.productForm.valid) {
-      const product = this.productForm.value as unknown as IProduct;
-      const categoryId = this.productForm.controls.category.value;
-      if (categoryId) {
-        product.categoryId = categoryId;
-      }
-      this.isLoading = true;
-      this.error = '';
-      this._productService
-        .createProduct(product)
-        .pipe(
-          catchError((err) => {
-            this.error = 'Не удалось создать объявление, попробуйте снова';
-            this.isLoading = false;
-            this.cdr.markForCheck();
-            return throwError(() => err);
-          }),
-          tap((product) => {
-            this.newProductId = product.id;
-            this.isLoading = false;
-            this.cdr.markForCheck();
-          }),
-          takeUntil(this.destroy$)
-        )
-        .subscribe();
-    }
+  markCategory() {
+    this.productForm.controls['category'].markAsTouched();
+    this.productForm.controls['category'].updateValueAndValidity();
   }
 }

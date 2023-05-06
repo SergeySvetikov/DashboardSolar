@@ -1,0 +1,11 @@
+
+<ng-container *ngIf="products && products.length !== 0; else noAdverts">
+  <div *ngFor="let product of products" >
+    <div>
+      <app-products-item [product]="product"></app-products-item>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noAdverts >
+  <p class="container">У данной категории нет объявлений</p>
+</ng-template>

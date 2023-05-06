@@ -1,1 +1,24 @@
-<p>Мои объявления</p>
+<div class="container">
+  <h3 class="my-products-title">Мои объявления</h3>
+  <div class="products-grid">
+    <a class="new-product" routerLink="/my-new-product">
+      <i class="pi pi-plus color"></i>
+      <p class="new-product__text">Новое объявление</p>
+    </a>
+    <ng-container *ngIf="isLoading" >
+      <div *ngFor="let item of skeleton">
+        <app-products-item ></app-products-item>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="adverts && adverts.length !== 0 && !isLoading; else noAdverts" >
+      <div *ngFor="let product of adverts">
+        <div>
+          <app-products-item [product]="product" ></app-products-item>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-template #noAdverts>
+    <p>У вас пока нет рекомендованных объявлений</p>
+  </ng-template>
+</div>

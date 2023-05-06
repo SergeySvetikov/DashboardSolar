@@ -1,0 +1,65 @@
+<ng-container *ngIf="!loadingStatus">
+  <div class="container-view">
+    <p-breadcrumb
+      class="view__breadcrumb"
+      [model]="breadCrumbs"
+    ></p-breadcrumb>
+    <div class="view gallery-image">
+      <div class="main-gallery">
+      <p class="view__name">{{ products.name }}</p>
+    <div class="view__gallery">
+      <img
+        src="{{ products.imageUrl }}"
+        alt="{{ products.name }}"
+        class="view__bg-image" />
+      <img
+        src="{{ products.imageUrl }}"
+        alt="{{ products.name }}"
+        class="view__main-img" />
+      </div>
+      <ul class="view__img-list">
+        <li>
+          <img
+            src="{{ products.imageUrl  }}"
+            alt="{{ products.name }}"
+            class="view__sub-img"
+          />
+        </li>
+        <li>
+          <img
+            src="{{ products.imageUrl }}"
+            alt="{{ products.name }}"
+            class="view__sub-img"
+          />
+        </li>
+        <li>
+          <img
+            src="{{ products.imageUrl }}"
+            alt="{{ products.name }}"
+            class="view__sub-img"
+          />
+        </li>
+      </ul>
+      </div>
+      <div class="view__data">
+        <p class="view__price">{{ products.price.toLocaleString('ru') }} ₽</p>
+        <div class="view__button">
+          <p-button styleClass="p-button">
+            <i class="pi pi-phone view__button-icon"></i>
+            <button type="submit" class="view__number" (click)="phoneModal()">Показать номер телефона</button>
+          </p-button>
+          <div class="view__address">
+            <h3 class="view__title-address">Адресс</h3>
+            <span id="location-input">{{ products.address }} </span>
+            <p class="view__map-button"
+               (click)="redirectToMap(products.address)">Открыть на карте
+              <i class="pi pi-external-link view__map-icon"></i>
+            </p>
+          </div>
+          <h3 class="view__title-desc">Описание</h3>
+          <p class="view__description">{{ products.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

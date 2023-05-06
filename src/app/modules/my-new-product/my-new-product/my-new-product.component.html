@@ -2,25 +2,24 @@
   <h2>Новое объявление</h2>
   <form class="container-form"
     [formGroup]="productForm"
-    (ngSubmit)="createProduct()">
+    (ngSubmit)="onSubmit()">
     <div class="label-form">
-      <label class="">
+      <label>
         Выберите категорию
       </label>
       <p-cascadeSelect
         class="input"
-        (click)="markCategoryAsTouched()"
+        (click)="markCategory()"
         [options]="categories"
         [optionGroupChildren]="['subCategories']"
-        formControlName="category"
+        formControlName ="category"
         optionLabel="name"
         optionGroupLabel="name"
         placeholder="Нажмите, чтобы выбрать"
       ></p-cascadeSelect>
-      <ng-container *ngIf="productForm.controls.category.touched">
-        <p class="alert"
-           *ngIf="productForm.controls.category.errors?.['required']">
-          Обязательно для заполнения
+      <ng-container *ngIf="productForm.get('category')?.touched">
+        <p class="alert" *ngIf="productForm.get('category')?.errors?.['required']">
+          Обязательное поле
         </p>
       </ng-container>
     </div>
@@ -31,35 +30,33 @@
       <input
         class="input-form"
         formControlName="name"
-        placeholder="Что хотите продать?" />
-      <ng-container *ngIf="productForm.controls.name.touched">
-        <p class="alert"
-           *ngIf="productForm.controls.name.errors?.['required']">
+        placeholder="Что хотите продать?"/>
+      <ng-container >
+        <p class="alert" *ngIf="productForm.get('name')?.errors?.['required'] &&
+          productForm.get('name')?.touched">
           Обязательное поле для заполнения
         </p>
         <p class="alert"
-           *ngIf="productForm.controls.name.errors?.['minlength']">
+           *ngIf="productForm.get('name')?.errors?.['minlength']">
           Минимальная длина названия - 3 символа
         </p>
       </ng-container>
     </div>
     <div>
-      <label class="label-form"> Описание </label>
+      <label class="label-form">Описание</label>
       <textarea
         class="input-form text-input"
         placeholder="Расскажите подробнее о товаре или услуге"
         formControlName="description"></textarea>
-      <ng-container *ngIf="productForm.controls.description.touched">
-        <p class="alert"
-           *ngIf="productForm.controls.description.errors?.['required']">
-          Обязательное поле для заполнения
+      <ng-container >
+        <p class="alert" *ngIf="productForm.get('description')?.errors?.['required'] &&
+          productForm.get('description')?.touched">
+          Заполните описание
         </p>
-        <p class="alert"
-           *ngIf="productForm.controls.description.errors?.['minlength']">
-          Минимальная длина описания - 10 символов
+        <p class="alert" *ngIf="productForm.get('description')?.errors?.['minlength']">
+          Минимальная длина описания - 30 символов
         </p>
-        <p class="alert"
-           *ngIf="productForm.controls.description.errors?.['maxlength']">
+        <p class="alert" *ngIf="productForm.get('description')?.errors?.['maxlength']">
           Максимальная длина описания - 300 символов
         </p>
       </ng-container>
@@ -72,22 +69,35 @@
         class="input-form"
         placeholder="Начните вводить адрес"
         formControlName="address">
-      <ng-container *ngIf="productForm.controls.address.touched">
-        <p class="alert"
-           *ngIf="productForm.controls.address.errors?.['required']">
+      <ng-container >
+        <p class="alert mb-4" *ngIf="productForm.get('address')?.errors?.['required'] &&
+          productForm.get('address')?.touched">
           Обязательное поле для заполнения
-        </p>
-        <p class="alert"
-           *ngIf="productForm.controls.address.errors?.['minlength']">
-          Минимальная длина адреса - 10 символов
-        </p>
-        <p class="alert"
-           *ngIf="productForm.controls.address.errors?.['maxlength']">
-          Максимальная длина адреса - 60 символов
         </p>
       </ng-container>
     </div>
-    <app-add-images (uploadFile)="onUpload($event)"></app-add-images>
+    <span >
+  <p-fileUpload
+    class="upload-file"
+    chooseIcon="pi pi-images"
+    chooseLabel="Добавить картинки"
+    name="files[]"
+    (onRemove)="imageRemove($event)"
+    (onSelect)="imageSelected($event)"
+    [fileLimit]="10"
+    [customUpload]="true"
+    [multiple]="true"
+    [auto]="true">
+    <ng-template pTemplate="toolbar">
+     <p class="alert"
+        *ngIf="productForm.get('imageUrl')?.errors?.['required']">
+          Необходимо загрузить изображение
+     </p>
+    </ng-template>
+  </p-fileUpload>
+  <small *ngIf="imagesError">
+  </small>
+</span>
     <div>
       <label class="label-form">
         Цена
@@ -96,14 +106,10 @@
              type="text"
              placeholder="0 ₽"
              formControlName="price">
-      <ng-container *ngIf="productForm.controls.price.touched">
-        <p class="alert"
-           *ngIf="productForm.controls.price.errors?.['required']">
+      <ng-container >
+        <p class="alert" *ngIf="productForm.get('price')?.errors?.['required'] &&
+          productForm.get('price')?.touched">
           Введите цену
-        </p>
-        <p class="alert"
-           *ngIf="productForm.controls.price.errors?.['maxlength']">
-          Максимальное количество символов - 7 символов
         </p>
       </ng-container>
     </div>
@@ -114,16 +120,10 @@
       <p-progressSpinner strokeWidth="4"
                          animationDuration="4s"></p-progressSpinner>
     </ng-template>
-    <ng-container *ngIf="newProductId">
-      <span class="add-link">Объявление создано!
-      <a [routerLink]="['/main-products',newProductId]">Ссылка</a>
-    </span>
-    </ng-container>
     <p class="alert">{{error}}</p>
   </form>
   <p class="rules">
-    Нажимая кнопку «Разместить объявление»<br />
+    Нажимая кнопку «Разместить объявление»<br/>
     Вы соглашаетесь с <a>правилами площадки</a>
   </p>
-
 </div>

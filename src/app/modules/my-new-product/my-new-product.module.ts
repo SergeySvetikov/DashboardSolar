@@ -6,7 +6,6 @@ import { RouterModule } from "@angular/router";
 import { MyNewProductRoutingModule } from "./my-new-product-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ToastModule } from "primeng/toast";
-import { AddImagesComponent } from "./add-images/add-images.component";
 
 @NgModule({
   declarations: [],
@@ -19,7 +18,6 @@ import { AddImagesComponent } from "./add-images/add-images.component";
     ]),
     ReactiveFormsModule,
     ToastModule,
-    AddImagesComponent
   ],
   exports: [],
 })

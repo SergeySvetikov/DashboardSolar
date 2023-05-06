@@ -1,0 +1,168 @@
+:host ::ng-deep .p-breadcrumb {
+  border: none;
+  padding: 0;
+  margin: 32px 0 0 0;
+}
+
+:host ::ng-deep .p-button {
+  display: flex;
+  justify-content: center;
+  height: 58px;
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.container-view {
+  max-width: 80rem;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+.view {
+  display: flex;
+
+  &__name {
+    margin-top: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    color: #1E293B;
+  }
+
+  .main-gallery {
+    margin-right: 41px;
+
+  }
+
+  &__gallery {
+    position: relative;
+    width: 856px;
+    height: 512px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  &__bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(12px);
+  }
+
+  &__main-img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    transform: translateX(-50%);
+    object-fit: contain;
+  }
+
+  &__img-list {
+    margin-top: 5px;
+    display: flex;
+    gap: 12px;
+  }
+
+  &__sub-img {
+    width: 120px;
+    height: 84px;
+    border-radius: 4px;
+    transition: 0.25s;
+
+    &:hover {
+      cursor: pointer;
+      border: 3px solid #3B82F6;
+      transform: scale(1.07);
+    }
+  }
+
+  &__price {
+    margin-top: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    color: #1E293B;
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    max-width: 416px;
+    margin-top: 16px;
+  }
+
+  &__data {
+    width: 383px;
+  }
+
+  &__number{
+    color: white;
+    background: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  &__title-address {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    margin-top: 40px;
+    margin-bottom: 8px
+  }
+
+  &__address {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__map-button {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: #3B82F6;
+    &:hover {
+      color: #0055CC;
+    }
+  }
+
+  &__map-icon {
+    padding-left: 8px;
+  }
+
+  &__title-desc {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    margin-top: 32px;
+    margin-bottom: 8px
+  }
+
+  &__description {
+    word-break: break-word;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__button-icon {
+    margin-right: 12px;
+    font-size: 1.5rem;
+  }
+}

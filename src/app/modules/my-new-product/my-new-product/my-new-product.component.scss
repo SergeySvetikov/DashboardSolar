@@ -7,7 +7,8 @@ h2 {
 .container-form {
   max-width: 856px;
 }
-.input{
+
+.input {
   display: block;
   width: 100%;
   margin: 8px 0;
@@ -15,22 +16,34 @@ h2 {
   line-height: 24px;
 }
 
-::ng-deep .p-cascadeselect{
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.upload-file ::ng-deep {
+  .p-fileupload-buttonbar {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+  }
+}
+
+::ng-deep .p-cascadeselect {
   border-radius: 4px;
   margin-bottom: 0;
 }
 
-::ng-deep form p-progressSpinner .p-progress-spinner{
+::ng-deep form p-progressSpinner .p-progress-spinner {
   width: 32px;
   height: 32px;
   margin: 0 12px;
 }
 
-::ng-deep .ng-invalid.ng-touched > .p-cascadeselect{
-  border-color:#EF4444;
+::ng-deep .ng-invalid.ng-touched > .p-cascadeselect {
+  border-color: #EF4444;
 }
 
-::ng-deep .p-cascadeselect:not(.p-disabled).p-focus{
+::ng-deep .p-cascadeselect:not(.p-disabled).p-focus {
   box-shadow: none;
   border-color: #3B82F6;;
 }
@@ -60,7 +73,7 @@ h2 {
   resize: none;
 }
 
-.alert{
+.alert {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -95,12 +108,16 @@ h2 {
   display: none;
 }
 
-button, .load-btn{
+.upload-file {
+  padding-top: 8px;
+}
+
+button, .load-btn {
   color: white;
   background: #3B82F6;
   border-radius: 4px;
-  transition:200ms;
-  cursor:pointer;
+  transition: 200ms;
+  cursor: pointer;
 }
 
 .load-btn:hover {
@@ -118,16 +135,16 @@ button, .load-btn{
   padding: 12px;
 }
 
-.submit:disabled{
+.submit:disabled {
   opacity: .8;
 }
 
 .add-link {
-  margin-left:16px;
+  margin-left: 16px;
   color: black;
 }
 
-.new-add-link a{
+.new-add-link a {
   color: #3B82F6;
 }
 
@@ -155,6 +172,22 @@ button, .load-btn{
 }
 
 @media (max-width: 767.98px) {
+
+  .file-upload ::ng-deep {
+    .file-upload-label {
+      padding-block: 0.5rem;
+    }
+
+    .p-fileupload .p-fileupload-buttonbar .p-button {
+      margin: 0;
+    }
+
+    .p-fileupload-buttonbar {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  }
   .container {
     padding: 12.8px 12.8px;
   }
@@ -203,49 +236,74 @@ button, .load-btn{
   }
 }
 
-@media screen and (min-width:576.98px) and (max-width: 991.98px){
-  ::ng-deep p-overlay .p-overlay{
+@media screen and (min-width: 576.98px) and (max-width: 991.98px) {
+  ::ng-deep p-overlay .p-overlay {
     min-width: 208px !important;
   }
 }
 
 @media (max-width: 575.98px) {
-  ::ng-deep p-cascadeSelect .p-cascadeselect-item-active>.p-cascadeselect-sublist{
-    left:0;
-    top:90%;
+  ::ng-deep p-cascadeSelect .p-cascadeselect-item-active > .p-cascadeselect-sublist {
+    left: 0;
+    top: 90%;
+  }
+  .file-upload ::ng-deep {
+    .p-fileupload-content {
+      .p-fileupload-filename {
+        & + div {
+          display: none;
+        }
+
+        display: none;
+      }
+
+      .p-fileupload-row > div:nth-child(1) {
+        img {
+          width: 75%;
+        }
+      }
+    }
   }
 
   .advert-title {
     font-size: 20px;
     margin: 12px 0;
   }
+
   label.load-btn {
     margin-right: 10px;
     font-size: 14px;
   }
+
   .input-form.load-img {
     font-size: 14px;
     padding: 6px 12px;
   }
+
   .load-btn {
     font-size: 14px;
     padding: 8px 12px;
   }
+
   .input-form {
     font-size: 14px;
     padding: 8px 12px;
     height: 40px;
   }
+
   .label-form {
     font-size: 14px;
   }
+
   label.load-btn {
     max-width: 60%;
     max-height: 100%;
   }
+
   .submit {
     font-size: 16px;
   }
+
   .rules {
     font-size: 14px;
   }

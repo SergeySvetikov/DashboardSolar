@@ -4,6 +4,7 @@ import {MyProductsComponent} from "./my-products/my-products.component";
 import {MyProductsRoutingModule} from "./my-products-routing.module";
 import { ButtonModule } from "primeng/button";
 import { BreadcrumbModule } from "primeng/breadcrumb";
+import { ProductsItemComponentModule } from "../../shared/components/products-item/products-item.component";
 
 @NgModule({
   declarations: [MyProductsComponent],
@@ -12,6 +13,7 @@ import { BreadcrumbModule } from "primeng/breadcrumb";
     MyProductsRoutingModule,
     ButtonModule,
     BreadcrumbModule,
+    ProductsItemComponentModule,
   ],
 })
 export class MyProductsModule {}
