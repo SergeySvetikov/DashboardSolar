@@ -9,7 +9,6 @@ const routes: Routes = [
     pathMatch: 'full',
     component: MyNewProductComponent,
     canActivate: [AuthGuard]
-
   },
 ];
 @NgModule({

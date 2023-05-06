@@ -62,13 +62,14 @@
       </ng-container>
     </div>
     <div>
-      <label class="label-form">
+      <label class="label-form" for="address">
         Адрес (место проведения сделки)
       </label>
       <input
         class="input-form"
         placeholder="Начните вводить адрес"
-        formControlName="address">
+        formControlName="address"
+        id="address">
       <ng-container >
         <p class="alert mb-4" *ngIf="productForm.get('address')?.errors?.['required'] &&
           productForm.get('address')?.touched">
@@ -118,7 +119,7 @@
     </ng-container>
     <ng-template #loading>
       <p-progressSpinner strokeWidth="4"
-                         animationDuration="4s"></p-progressSpinner>
+                         animationDuration="1s"></p-progressSpinner>
     </ng-template>
     <p class="alert">{{error}}</p>
   </form>

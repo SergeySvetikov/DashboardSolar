@@ -8,7 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { AuthService } from '../../../core/services/auth.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { switchMap, tap } from "rxjs";
-import { IBreadCrumbs } from '../../../core/interfaces/breadCrumbs.model';
+import { IBreadCrumbs } from "../../../core/interfaces/breadCrumbs.model";
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
@@ -53,10 +53,10 @@ export class ProductViewComponent implements OnInit {
         return this._categoryService.getBreadCrumbs(data.categoryId);
       })
     ).subscribe((value) => {
-      this._createBreadCrubms(value);
+      this._createBreadCrumbs(value);
     });
   }
-  private _createBreadCrubms(value: IBreadCrumbs[]) {
+  private _createBreadCrumbs(value: IBreadCrumbs[]) {
     this.breadCrumbs = value.reduce(
       (acc: MenuItem[], item) => {
         acc.push(item)

@@ -15,7 +15,7 @@ export class MainProductsComponent implements OnInit {
       setTimeout(() => {
         this.adverts = response;
         this.isLoading = false;
-      }, 1000);
+      }, 200);
     });
   }
 }

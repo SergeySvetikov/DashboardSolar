@@ -1,7 +1,6 @@
 <ng-container *ngIf="!loadingStatus">
   <div class="container-view">
     <p-breadcrumb
-      class="view__breadcrumb"
       [model]="breadCrumbs"
     ></p-breadcrumb>
     <div class="view gallery-image">
@@ -36,15 +35,14 @@
           <img
             src="{{ products.imageUrl }}"
             alt="{{ products.name }}"
-            class="view__sub-img"
-          />
+            class="view__sub-img" />
         </li>
       </ul>
       </div>
       <div class="view__data">
         <p class="view__price">{{ products.price.toLocaleString('ru') }} ₽</p>
-        <div class="view__button">
-          <p-button styleClass="p-button">
+        <div class="view__button" >
+          <p-button class="button">
             <i class="pi pi-phone view__button-icon"></i>
             <button type="submit" class="view__number" (click)="phoneModal()">Показать номер телефона</button>
           </p-button>
@@ -63,3 +61,4 @@
     </div>
   </div>
 </ng-container>
+
