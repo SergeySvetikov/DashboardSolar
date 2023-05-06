@@ -18,6 +18,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FileUpload, FileUploadModule } from "primeng/fileupload";
 import { INewProduct } from '../../../core/interfaces/new-product.model';
 import { FileService } from '../../../core/services/file.service';
+import { YaApiLoaderService } from "angular8-yandex-maps";
 
 type ProductsCategory = ICategory & { subCategories?: ICategory[] };
 
@@ -51,6 +52,7 @@ export class MyNewProductComponent implements OnInit {
     private _productService: ProductsService,
     private _categoryService: CategoryService,
     private fb: FormBuilder,
+    private _yaApiLoaderService: YaApiLoaderService,
     private _fileService: FileService,
     private destroy$: DestroyService,
     private _router: Router,
@@ -64,6 +66,9 @@ export class MyNewProductComponent implements OnInit {
     this.selectedImage = null
   }
   ngOnInit(): void {
+    this._yaApiLoaderService.load().subscribe((ymaps) => {
+      new ymaps.SuggestView('address')
+    })
     this._categoryService.getCategories().subscribe((value) => {
       this.categories = value;
     });

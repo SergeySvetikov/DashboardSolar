@@ -11,9 +11,15 @@ import { ChipsModule } from "primeng/chips";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { FormsModule } from "@angular/forms";
 import { ProductNumberComponent } from "../../shared/components/product-number/product-number.component";
+import { CategoryPageComponent } from "./category-page/category-page.component";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
 
 @NgModule({
-  declarations: [MainProductsComponent, ProductViewComponent],
+  declarations: [
+    MainProductsComponent,
+    ProductViewComponent,
+    CategoryPageComponent,
+  ],
   imports: [
     CommonModule,
     MainPageRoutingModule,
@@ -25,6 +31,7 @@ import { ProductNumberComponent } from "../../shared/components/product-number/p
     BreadcrumbModule,
     FormsModule,
     ProductNumberComponent,
+    ProgressSpinnerModule,
   ],
   exports: [ProductViewComponent],
 })

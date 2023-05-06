@@ -1,4 +1,4 @@
-:host ::ng-deep .p-breadcrumb {
+:host ::ng-deep .p-breadcrumb.p-component {
   border: none;
   padding: 0;
   margin: 32px 0 0 0;
@@ -35,13 +35,12 @@
 
   .main-gallery {
     margin-right: 41px;
-
   }
 
   &__gallery {
     position: relative;
     width: 856px;
-    height: 512px;
+    padding-bottom: 60%;
     margin-top: 16px;
     margin-bottom: 24px;
     overflow: hidden;
@@ -60,7 +59,7 @@
     top: 0;
     left: 50%;
     height: 100%;
-    width: auto;
+    max-width: 100%;
     transform: translateX(-50%);
     object-fit: contain;
   }
@@ -101,7 +100,7 @@
   }
 
   &__data {
-    width: 383px;
+    width: 100%;
   }
 
   &__number{
@@ -164,5 +163,40 @@
   &__button-icon {
     margin-right: 12px;
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 1399.98px) {
+  .view{
+    flex-direction: column;
+    padding: 2px 15px 2px 15px;
+    width: 100%;
+    &__gallery {
+      width: 100%;
+    }
+    &__sub-img {
+      width: 100%;
+    }
+  }
+  .main-gallery {
+    margin-right: 0!important;
+  }
+
+  :host ::ng-deep .p-breadcrumb.p-component{
+    padding: 2px 15px 2px 15px;
+    width: 100%;
+  }
+
+  :host ::ng-deep .p-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .view {
+    padding: 2px 15px 2px 15px;
+    &__number {
+      font-size: 16px;
+    }
   }
 }
