@@ -4,5 +4,6 @@ export interface ICategory {
   name: string,
   isActive?: boolean,
   createdAt?: string,
+  subCategories?: ICategory[]
 }
 

@@ -6,7 +6,6 @@
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
 
-
 * {
   box-sizing: border-box;
   font-family: 'Inter', 'sans-serif';
@@ -18,6 +17,10 @@
   padding-block: 2rem;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .alert{
   font-weight: 400;
   font-size: 14px;
@@ -26,3 +29,4 @@
   margin-top: 2px;
   margin-bottom: 0;
 }
+

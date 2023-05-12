@@ -11,6 +11,16 @@
   margin: auto;
   justify-content: flex-end;
 }
+.user-menu ::ng-deep {
+  .p-menu-list {
+    li:last-child {
+      .p-menuitem-text{
+        color: #ff3b00;
+      }
+    }
+  }
+
+}
 
 .header-buttons {
 
@@ -42,10 +52,12 @@
 @media (max-width: 1399.98px) {
   .header-wrapper {
     padding-inline: 0.8rem;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 767.98px) {
+
   span {
     display: none;
   }

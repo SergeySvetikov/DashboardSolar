@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-my-options',
   templateUrl: './my-options.component.html',
-  styleUrls: ['./my-options.component.scss']
+  styleUrls: ['./my-options.component.scss'],
 })
+export class MyOptionsComponent implements OnInit {
 
-export class MyOptionsComponent {
   userName?: string;
   userMail?: string;
   optionsForm!: FormGroup;
@@ -19,7 +19,10 @@ export class MyOptionsComponent {
   ngOnInit() {
     this.optionsForm = new FormGroup({
       mail: new FormControl('', [Validators.minLength(5), Validators.email]),
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
       address: new FormControl('', [Validators.minLength(8)]),
     });
     this.changePasswordForm = new FormGroup({
@@ -33,8 +36,9 @@ export class MyOptionsComponent {
       ]),
     });
   }
+  changeUserData() {
+  }
 
-  changeUserData() {}
-
-  changeUserPassword() {}
+  changeUserPassword() {
+  }
 }

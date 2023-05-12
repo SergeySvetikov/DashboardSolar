@@ -1,27 +1,35 @@
+.user-name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+
 .number{
   font-weight: 400;
   font-size: 30px;
   line-height: 36px;
+  text-decoration: none;
   color: #3B82F6;
-  margin: 0;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.bord{
-  border-top: 1px solid #E2E8F0;
-  margin: 16px 0;
-}
-
-.rules > p, li{
-  font-weight: 400;
+.rules {
   font-size: 18px;
   line-height: 24px;
-  color: #1E293B;
-}
 
-.rules ul{
-  display: block;
-  margin: 0;
-  padding-left: 1.5rem;
+
+  ul {
+    padding-left: 18px;
+    line-height: 24px;
+  }
+
+  li {
+    list-style-type: disc;
+  }
+
 }
 
 @media screen and (max-width: 576px){
@@ -29,7 +37,7 @@
     font-size: 24px;
   }
 
-  .rules > p, li{
+  .rules > li{
     font-size: 16px;
   }
 }

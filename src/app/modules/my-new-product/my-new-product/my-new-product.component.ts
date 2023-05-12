@@ -15,10 +15,11 @@ import { CommonModule, NgIf } from '@angular/common';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DestroyService } from '../../../core/services/destroy.service';
 import { Router, RouterLink } from '@angular/router';
-import { FileUpload, FileUploadModule } from "primeng/fileupload";
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { INewProduct } from '../../../core/interfaces/new-product.model';
 import { FileService } from '../../../core/services/file.service';
-import { YaApiLoaderService } from "angular8-yandex-maps";
+import { YaApiLoaderService } from 'angular8-yandex-maps';
+import { takeUntil } from 'rxjs';
 
 type ProductsCategory = ICategory & { subCategories?: ICategory[] };
 
@@ -46,8 +47,9 @@ export class MyNewProductComponent implements OnInit {
   error: string | null = null;
   categories: ProductsCategory[] = [];
   productForm!: FormGroup;
-  imagesError: boolean = false
-  selectedImage!: File | null
+  imagesError: boolean = false;
+  selectedImage!: File | null;
+
   constructor(
     private _productService: ProductsService,
     private _categoryService: CategoryService,
@@ -55,31 +57,34 @@ export class MyNewProductComponent implements OnInit {
     private _yaApiLoaderService: YaApiLoaderService,
     private _fileService: FileService,
     private destroy$: DestroyService,
-    private _router: Router,
-  ) {
-  }
+    private _router: Router
+  ) {}
+
   imageSelected(imagesToSelect: FileUpload) {
-    this.selectedImage = imagesToSelect.files[0]
-    console.log(imagesToSelect.files[0])
+    this.selectedImage = imagesToSelect.files[0];
+    console.log(imagesToSelect.files[0]);
   }
+
   imageRemove(imageToDelete: { file: File }) {
-    this.selectedImage = null
+    this.selectedImage = null;
   }
+
   ngOnInit(): void {
     this._yaApiLoaderService.load().subscribe((ymaps) => {
-      new ymaps.SuggestView('address')
-    })
+      new ymaps.SuggestView('address');
+    });
     this._categoryService.getCategories().subscribe((value) => {
       this.categories = value;
     });
     this.productForm = this.fb.group({
       category: [null, Validators.required],
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(350)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),],],
+      description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(350),],],
       address: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.maxLength(7)]],
     });
   }
+
   onSubmit() {
     this._fileService.uploadFile(this.selectedImage!).subscribe((imageUrl) => {
       const { name, description, category, price, address } =
@@ -92,13 +97,16 @@ export class MyNewProductComponent implements OnInit {
         price: Number(price),
         address: address,
       };
-      this._productService.createProduct(newProduct)
+      this._productService
+        .createProduct(newProduct)
+        .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
-          this._router.navigateByUrl('/')
+          this._router.navigateByUrl('/');
         })
-      this.isLoading = true
-    })
+      this.isLoading = true;
+    });
   }
+
   markCategory() {
     this.productForm.controls['category'].markAsTouched();
     this.productForm.controls['category'].updateValueAndValidity();

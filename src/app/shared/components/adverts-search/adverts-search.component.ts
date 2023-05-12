@@ -3,8 +3,9 @@ import { CategoryService } from '../../../core/services/category.service';
 import { CategoriesComponent } from './categories/categories.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgIf } from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { OverlayModule } from 'primeng/overlay';
 
 @Component({
   selector: 'app-adverts-search',
@@ -14,20 +15,36 @@ import { RouterLink } from '@angular/router';
 export class AdvertsSearchComponent implements OnInit {
   public isCategoriesOpened: boolean = false;
   public categories: any[] = [];
-  constructor(private _CategoryService: CategoryService) {}
+
+  constructor(private _categoryService: CategoryService) {}
   toggleCategories(): void {
     this.isCategoriesOpened = !this.isCategoriesOpened;
+    if(this.isCategoriesOpened) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
   }
+
   public ngOnInit(): void {
-    this._CategoryService.getCategories().subscribe((response) => {
+    this._categoryService.getCategories().subscribe((response) => {
       this.categories = response;
     });
   }
 }
+
 @NgModule({
   declarations: [AdvertsSearchComponent, CategoriesComponent],
-  imports: [ButtonModule, InputTextModule, NgIf, RouterLink],
-  exports: [AdvertsSearchComponent],
+  imports: [
+    ButtonModule,
+    InputTextModule,
+    NgIf,
+    RouterLink,
+    NgForOf,
+    NgClass,
+    OverlayModule,
+  ],
+  exports: [AdvertsSearchComponent, CategoriesComponent],
   providers: [CategoryService],
 })
 export class AdvertsSearchComponentModule {}

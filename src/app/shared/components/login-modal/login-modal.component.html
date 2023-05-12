@@ -1,53 +1,95 @@
 <ng-container *ngIf="loginMode; else registrationMode">
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="flex flex-column mb-3">
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" #loginMode="ngForm">
+    <div class="flex flex-column">
       <input
-        class="mb-3 "
         formControlName="login"
         pInputText
         placeholder="Логин"
         type="text">
-      <input
-        formControlName="password"
-        pInputText
-        placeholder="Пароль"
-        type="password">
+      <small
+        *ngIf="loginForm.get('login')?.errors?.['required'] && loginForm.get('login')?.touched"
+        class="p-error mt-1">
+        Логин обязателен для заполнения
+      </small>
+      <span class="p-input-icon-right">
+
+        <input
+          [type]="signUpPasswordInputType"
+          class="w-full mt-3 flex-center"
+          formControlName="password"
+          pInputText
+          placeholder="Пароль">
+         <i (click)="onShowPassword()" *ngIf="!showPassword" class="pi pi-eye pt-2"></i>
+          <i (click)="onShowPassword()" *ngIf="showPassword" class="pi pi-eye-slash pt-2"></i>
+      </span>
+      <small
+        *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+        class="p-error mt-1">
+        Пароль обязателен к заполнению
+      </small>
+      <small
+        *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')!.touched"
+        class="p-error pt-1">
+        Пароль должен содержать минимум 6 символов
+      </small>
+      <div *ngIf="loginError" class="alert-login">{{ loginError }}</div>
     </div>
-    <div class="flex justify-content-center gap-3">
-      <button [disabled]="!form.valid" label="Войти" pButton type="submit"></button>
+    <div class="flex justify-content-center gap-3 mt-3">
+      <button [disabled]="!loginForm.valid" label="Войти" pButton type="submit"></button>
       <button (click)="switchMode()" class="p-button-text" label="Регистрация" pButton type="button"></button>
     </div>
   </form>
 </ng-container>
 <ng-template #registrationMode>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
     <div class="flex flex-column mb-3">
       <input
-        class="mb-3"
         formControlName="login"
         pInputText
         placeholder="Имя пользователя"
         type="text">
+      <small
+        *ngIf="loginForm.get('login')?.errors?.['required'] && loginForm.get('login')?.touched"
+        class="p-error mt-1">
+        Логин обязателен для заполнения
+      </small>
       <input
-        class="mb-3"
+        class="mt-3"
         formControlName="email"
         pInputText
         placeholder="Почта"
         type="email">
+      <small
+        *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
+        class="p-error mt-1">
+        Пароль обязателен к заполнению
+      </small>
       <input
-        class="mb-3"
+        class="mt-3"
         formControlName="password"
         pInputText
         placeholder="Пароль"
         type="password">
+      <small
+        *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+        class="p-error mt-1">
+        Пароль обязателен к заполнению
+      </small>
+      <small
+        *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')!.touched"
+        class="p-error pt-1">
+        Пароль должен содержать минимум 8 символов
+      </small>
       <input
         formControlName="passwordConfirmation"
         pInputText
         placeholder="Подтвердите пароль"
-        type="password">
+        type="password"
+        class="p-error mt-3">
+      <div *ngIf="loginError" class="alert-login">{{ loginError }}</div>
     </div>
     <div class="flex flex-wrap justify-content-center gap-3">
-      <button [disabled]="!form.valid" label="Зарегистрироваться" pButton type="submit"></button>
+      <button [disabled]="!loginForm.valid" label="Зарегистрироваться" pButton type="submit"></button>
       <button (click)="switchMode()" class="p-button-text" label="Вход" pButton type="button"></button>
     </div>
   </form>

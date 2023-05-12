@@ -1,11 +1,48 @@
-
-<ng-container *ngIf="products && products.length !== 0; else noAdverts">
-  <div *ngFor="let product of products" >
-    <div>
-      <app-products-item [product]="product"></app-products-item>
+<div class="container">
+  <h2 class="title">Объявления по запросу </h2>
+  <div class="categories-header">
+<!--    <div class="all-categories">-->
+<!--      <h3>Все категории</h3>-->
+<!--    </div>-->
+<!--    <div class="products">-->
+<!--      <span>Всего найдено 1 234 объявления</span>-->
+<!--    </div>-->
+    <div class="sort">
+      <span class="mr-2">Сортировка по</span>
+      <p-dropdown optionLabel="name"></p-dropdown>
     </div>
   </div>
-</ng-container>
-<ng-template #noAdverts >
-  <p class="container">У данной категории нет объявлений</p>
-</ng-template>
+  <div class="flex main-container">
+    <div class="categories">
+      <div class="categories">
+      </div>
+      <div class="price">
+        <h3 class="mt-1">Цена</h3>
+        <form>
+          <div class="flex">
+            <input [(ngModel)]="filter.minPrice" name="minPrice" (change)="updateFilter()" placeholder="Цена от">
+            <input [(ngModel)]="filter.maxPrice" name="maxPrice" (change)="updateFilter()" placeholder="до, руб.">
+          </div>
+        <button (click) = myMethodChangingQueryParams() class="button">Показать объявления</button>
+        </form>
+      </div>
+    </div>
+    <div class="products-grid">
+      <ng-container *ngIf="isLoading">
+        <div *ngFor="let item of skeleton">
+          <app-products-item></app-products-item>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="products && products.length !== 0; else noAdverts">
+        <div *ngFor="let product of products">
+          <div>
+            <app-products-item [product]="product"></app-products-item>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #noAdverts>
+      <p class="container">У данной категории нет объявлений</p>
+    </ng-template>
+  </div>
+</div>

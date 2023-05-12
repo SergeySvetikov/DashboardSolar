@@ -1,15 +1,15 @@
 <ng-container *ngIf="product; else skeleton">
-  <div class="cont">
+  <a class="cont" routerLink="/product/{{product.id}}">
     <div class="wrapper">
-      <img [src]="product.imageUrl" class="image" >
+      <img [src]="product.imageUrl" class="image">
     </div>
     <h4 class="title">{{product.name}}</h4>
-    <p class="price">{{product.price ?? "Цена не указана"}} ₽</p>
-    <p class="address">{{product.address ?? "Адрес не указан"}}</p>
+    <p class="price">{{product.price ? (product.price).toLocaleString() + ' ₽' : "Цена не указана"}} </p>
+    <p class="address">{{product.address}}</p>
     <p class="date">{{product.createdAt | date:'d MMMM':'':'ru' | titlecase}}
       <span class="date">в {{product.createdAt | date:'HH:mm'}}</span>
     </p>
-  </div>
+  </a>
 </ng-container>
 <ng-template #skeleton>
   <div>

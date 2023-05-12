@@ -8,11 +8,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
-import { ProductsItemComponentModule } from './components/products-item/products-item.component';
 import { MainPageModule } from "../modules/main-pages/main-page.module";
 
 @NgModule({
-  declarations: [HeaderComponent, ],
+  declarations: [HeaderComponent],
   exports: [HeaderComponent],
   imports: [
     CommonModule,

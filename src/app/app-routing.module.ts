@@ -2,14 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./modules/main-pages/main-page.module').then(
-        (m) => m.MainPageModule
-      )
-  },
+
   {
     path: 'my-new-product',
     loadChildren: () =>
@@ -30,7 +23,16 @@ const routes: Routes = [
       import('./modules/my-options/my-options.module').then(
         (m) => m.MyOptionsModule
       )
-  }
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./modules/main-pages/main-page.module').then(
+        (m) => m.MainPageModule
+      )
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

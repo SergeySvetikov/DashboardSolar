@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +29,8 @@ export class HeaderComponent {
         label: 'Выйти',
         command: () => {
           this.authService.logout()
-        }
+        },
+        routerLink: ['/'],
       },
     ];
   }

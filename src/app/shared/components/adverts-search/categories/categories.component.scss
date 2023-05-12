@@ -1,0 +1,149 @@
+h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.categories-wrapper {
+  display: block;
+  max-width: 80rem;
+  margin-left: 151.5px;
+  margin-right: 151.5px;
+  position: absolute;
+  width: 100%;
+  z-index: 10000;
+  left: 0;
+  height: 400px;
+  box-sizing: border-box;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #fff;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-shrink: 0;
+
+  & .main-categories {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1E293B;
+    padding-left: 0.5rem;
+  }
+
+  &:hover {
+    & .sub-wrapper {
+      display: block;
+    }
+  }
+}
+
+.parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 282px;
+  height: 40px;
+
+  &:hover {
+    background-color: #F5F5F5;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  &:focus{
+    background-color: #F5F5F5;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  padding-left: 12px;
+}
+
+.contain {
+  position: relative;
+}
+
+.sub-wrapper {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  left: 282px;
+  top: 0;
+  width: auto;
+  height: 400px;
+  z-index: 10;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 4px 0 24px 48px;
+
+  & h2 {
+    padding-right: 4px;
+  }
+}
+
+.wrapper {
+  position: relative;
+}
+
+.sub-title {
+  display: flex;
+  align-items: center;
+  margin: 4px 0 24px 48px;
+  text-decoration: none;
+
+
+  & h3 {
+    padding-right: 4px;
+  }
+}
+
+.sub-sub-title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 8px;
+
+}
+
+.sub-categories {
+  gap: 20px;
+  margin-left: 48px;
+  color: black;
+}
+
+.child-categories {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: black;
+  text-decoration: #1E293B;
+}

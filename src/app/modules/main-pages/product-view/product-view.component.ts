@@ -65,6 +65,7 @@ export class ProductViewComponent implements OnInit {
       [{ icon: 'pi pi-home', routerLink: '/' }]
     );
   }
+
 }
 
 

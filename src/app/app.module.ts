@@ -13,6 +13,15 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { MyNewProductModule } from "./modules/my-new-product/my-new-product.module";
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { ChipsModule } from "primeng/chips";
+import { DropdownModule } from "primeng/dropdown";
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { MainPageModule } from "./modules/main-pages/main-page.module";
+import { ProductsItemComponentModule } from "./shared/components/products-item/products-item.component";
+import { AngularYandexMapsModule, YaConfig } from "angular8-yandex-maps";
+const mapConfig: YaConfig = {
+  lang: 'ru_RU',
+};
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,7 +36,12 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
     SharedComponentModule,
     ButtonModule,
     ProgressSpinnerModule,
-
+    ChipsModule,
+    DropdownModule,
+    InputTextareaModule,
+    MainPageModule,
+    ProductsItemComponentModule,
+    AngularYandexMapsModule.forRoot(mapConfig),
   ],
   providers: [
     DialogService,

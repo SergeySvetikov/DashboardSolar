@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap, throwError } from 'rxjs';
-import { passwordsMatchValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-login-modal',
@@ -13,8 +12,11 @@ import { passwordsMatchValidator } from 'src/app/utils/validators';
 })
 export class LoginModalComponent {
   loginMode: boolean = true;
+  signUpPasswordInputType: string = 'password';
+  showPassword: boolean = false;
+  loginError!: string;
 
-  form = new FormGroup({
+  loginForm = new FormGroup({
     login: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [
       Validators.required,
@@ -23,7 +25,6 @@ export class LoginModalComponent {
     passwordConfirmation: new FormControl(null, [Validators.minLength(6)]),
     email: new FormControl(null, [Validators.email])
   });
-
   constructor(
     private _config: DynamicDialogConfig,
     private _dialogRef: DynamicDialogRef,
@@ -32,39 +33,36 @@ export class LoginModalComponent {
   ) {
     _config.header = 'Авторизация';
   }
-
-  private _changeFormFields() {
-    if (this.loginMode) {
-      this.form.controls.email.removeValidators(Validators.required)
-      this.form.controls.passwordConfirmation.removeValidators(Validators.required)
-    } else {
-      this.form.controls.email.addValidators(Validators.email)
-      this.form.controls.passwordConfirmation.addValidators(Validators.required)
-    }
-    this.form.controls.email.updateValueAndValidity()
-    this.form.controls.passwordConfirmation.updateValueAndValidity()
+  onShowPassword() {
+    this.signUpPasswordInputType = this.signUpPasswordInputType === 'password'
+      ? 'text'
+      : 'password';
+    this.showPassword = !this.showPassword;
   }
+
   onSubmit() {
     if (this.loginMode) {
-      const {login, password} = this.form.value
+      const {login, password} = this.loginForm.value
       this._AuthService.login({
         login: login ?? '',
         password: password ?? ''
       }).pipe(
         catchError((err) => {
+          this.handleError(err);
           return throwError(() => err)
         }), tap(() => {
           this._dialogRef.close()
           this.router.navigate([''])
         })).subscribe()
     } else {
-      const { login, email, password } = this.form.value
+      const { login, email, password } = this.loginForm.value
       this._AuthService.registration({
         login: login ?? '',
         email: email ?? '',
         password: password ?? ''
       }).pipe(
         catchError((err) => {
+          this.handleError(err);
           return throwError(() => err)
         }), tap(() => {
           this._dialogRef.close()
@@ -72,9 +70,19 @@ export class LoginModalComponent {
         })).subscribe()
     }
   }
+  handleError(err: any) {
+    if (err.status === 500) {
+      this.loginError = 'Неправильный логин или пароль';
+    } else {
+        this.loginError = 'Произошла ошибка при авторизации';
+      }
+      console.log('Произошла ошибка:', err);
+  }
+
   switchMode() {
     this.loginMode = !this.loginMode;
     this._config.header = this.loginMode ? 'Авторизация' : 'Регистрация';
-    this.switchMode()
+    this.showPassword = true;
+    this.signUpPasswordInputType = 'password';
   }
 }
