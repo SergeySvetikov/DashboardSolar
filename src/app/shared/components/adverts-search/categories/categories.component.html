@@ -1,1 +1,35 @@
-<p>categories works!</p>
+<div class="overlay">
+  <div class="categories-wrapper">
+    <div class="contain">
+      <div *ngFor="let category of categories" class="main-wrapper">
+        <div class="main-categories ">
+          <div class="parent">
+            <p class="active">{{ category.name}}</p>
+            <i class="pi pi-chevron-right"></i>
+          </div>
+        </div>
+        <div class="">
+          <div class="sub-wrapper">
+            <div class="title">
+              <h2>{{ category.name }}</h2>
+              <i class="pi pi-chevron-right"></i>
+            </div>
+            <div *ngIf="category.subCategories" class="sub-categories">
+              <div *ngFor="let subCategory of category.subCategories">
+                <div class="sub-sub-title">
+                  <a routerLink="/category" [queryParams]="{categoryId: subCategory.id}">{{ subCategory.name }}</a>
+                </div>
+                <div *ngIf="subCategory.subCategories" class="child-categories">
+                  <div *ngFor="let subSubCategory of subCategory.subCategories">
+                    <a routerLink="/category" [queryParams]="{prop: subCategory.id}">{{ subSubCategory.name }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

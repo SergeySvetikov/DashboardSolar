@@ -13,6 +13,7 @@ import { FormsModule } from "@angular/forms";
 import { ProductNumberComponent } from "../../shared/components/product-number/product-number.component";
 import { CategoryPageComponent } from "./category-page/category-page.component";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { TreeModule } from "primeng/tree";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
     FormsModule,
     ProductNumberComponent,
     ProgressSpinnerModule,
+    TreeModule,
   ],
   exports: [ProductViewComponent],
 })

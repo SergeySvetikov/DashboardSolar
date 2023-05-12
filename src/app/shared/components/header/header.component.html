@@ -1,9 +1,7 @@
 <header class="header">
   <div class="header-wrapper">
-
     <ng-container *ngIf="(isAuthenticated | async); else notAuthenticated" class="header-buttons">
-      <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
-
+      <p-menu class="user-menu" #menu [model]="menuItems" [popup]="true"></p-menu>
       <button (click)="menu.toggle($event)" class="p-button-text header-buttons__login-btn" pButton>
         <i class="pi pi-user"></i>
         <span>
@@ -11,7 +9,6 @@
           <i class="pi pi-chevron-down"></i>
         </span>
       </button>
-
       <button class="header-buttons__add-btn" pButton routerLink="/my-new-product">
         <span>Новое объявление</span>
         <i class="pi pi-plus"></i>

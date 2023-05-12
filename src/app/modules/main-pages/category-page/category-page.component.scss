@@ -1,0 +1,98 @@
+.title {
+  padding-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.products-grid {
+  display: grid;
+  width: 75%;
+  justify-content: flex-end;
+  grid-template-columns: repeat(3, minmax(12.5rem, 1fr));
+  grid-gap: 1.5rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: auto;
+  padding-block: 2rem;
+}
+
+.categories-header {
+  display: flex;
+  align-items: center;
+}
+
+.products {
+  margin-left: 190px;
+  display: flex;
+  justify-content: end;
+  max-width: 100%;
+}
+
+.categories {
+  height: 100%;
+}
+
+.sort {
+  margin-left: auto;
+}
+
+input {
+  max-width: 149px;
+  height: 40px;
+  border: 1px solid #CBD5E1;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 8px 12px;
+}
+
+
+.button {
+  width: 306px;
+  height: 48px;
+  background: #3B82F6;
+  color: white;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  transition: .3s;
+  &:hover {
+    background: #145cc9;
+    transition: .3s;
+  }
+}
+
+h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.main-container {
+  margin-top: 1rem;
+}
+
+.categories {
+  min-width: 25%;
+}
+
+@media (max-width: 991.98px) {
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+  };
+
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(12.5rem, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .products-grid {
+    grid-template-columns: repeat(1, minmax(12.5rem, 1fr));
+  }
+}

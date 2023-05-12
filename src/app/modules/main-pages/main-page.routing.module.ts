@@ -11,15 +11,15 @@ const routes: Routes = [
     component: MainProductsComponent,
   },
   {
-    path: ':id',
+    path: 'product/:id',
+    pathMatch: 'full',
     component: ProductViewComponent,
   },
   {
-    path: 'category/:id',
+    path: 'category',
     component: CategoryPageComponent
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

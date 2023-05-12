@@ -11,19 +11,15 @@ export class AuthService {
   baseUrl: string = '/api/Account';
   private _isAuthSubject = new BehaviorSubject<boolean>(false);
   public isAuth$: Observable<boolean> = this._isAuthSubject.asObservable().pipe();
-
   constructor(private _http: HttpClient, private tokenService: TokenService) { }
-
   private computePath(path: string) {
     return `${this.baseUrl}/${path}`
   }
-
   checkAuth() {
     if (this.tokenService.getToken()) {
       this._isAuthSubject.next(true);
     }
   }
-
   login(model: IAuth): Observable<string> {
     return this._http.post<string>(this.computePath('login'), model).pipe(
       tap(
@@ -34,12 +30,10 @@ export class AuthService {
       )
     )
   }
-
   logout() {
     this.tokenService.destroyToken()
     this._isAuthSubject.next(false)
   }
-
   registration(model: IRegistration): Observable<string> {
     return this._http.post<string>(this.computePath('register'), model).pipe(
       switchMap(() => {

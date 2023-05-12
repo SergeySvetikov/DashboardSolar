@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core
 import {RouterLink} from "@angular/router";
 import { DatePipe, NgIf, TitleCasePipe } from "@angular/common";
 import {SkeletonModule} from "primeng/skeleton";
+import { IProduct } from "../../../core/interfaces/product.model";
 
 @Component({
   selector: 'app-products-item',
@@ -11,8 +12,7 @@ import {SkeletonModule} from "primeng/skeleton";
 
 })
 export class ProductsItemComponent {
-  @Input() product: any | undefined;
-
+  @Input() product!: IProduct;
 }
 @NgModule({
   declarations: [ProductsItemComponent],
